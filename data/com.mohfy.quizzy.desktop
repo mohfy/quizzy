@@ -2,9 +2,9 @@
 Version=1.0
 Type=Application
 
-Name=Adwaita Template
-Comment=A template for creating GNOME apps with Swift
-Categories=Development;GNOME;
+Name=Quizzy
+Comment=Answer questions on various topics to test your knowledge!
+Categories=Learn;
 
 Icon=com.mohfy.quizzy
 Exec=Quizzy

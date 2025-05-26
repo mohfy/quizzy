@@ -9,22 +9,13 @@ let package = Package(
         .macOS(.v13)
     ],
     dependencies: [
-        .package(url: "https://git.aparoksha.dev/aparoksha/adwaita-swift", branch: "main"),
-        .package(url: "https://git.aparoksha.dev/aparoksha/localized", branch: "main")
+        .package(url: "https://git.aparoksha.dev/aparoksha/adwaita-swift", branch: "main")
     ],
     targets: [
         .executableTarget(
             name: "Quizzy",
             dependencies: [
-                .product(name: "Adwaita", package: "adwaita-swift"),
-                .product(name: "Localized", package: "localized")
-            ],
-            path: "Sources",
-            resources: [
-                .process("Localized.yml")
-            ],
-            plugins: [
-                .plugin(name: "GenerateLocalized", package: "localized")
+                .product(name: "Adwaita", package: "adwaita-swift")
             ]
         )
     ],

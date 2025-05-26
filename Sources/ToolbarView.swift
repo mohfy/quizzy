@@ -9,30 +9,30 @@ struct ToolbarView: View {
     var view: Body {
         HeaderBar.end {
             Menu(icon: .default(icon: .openMenu)) {
-                MenuButton(Loc.newWindow, window: false) {
+                MenuButton("New Window", window: false) {
                     app.addWindow("main")
                 }
                 .keyboardShortcut("n".ctrl())
-                MenuButton(Loc.closeWindow) {
+                MenuButton("Close Window") {
                     window.close()
                 }
                 .keyboardShortcut("w".ctrl())
                 MenuSection {
-                    MenuButton(Loc.about, window: false) {
+                    MenuButton("About", window: false) {
                         about = true
                     }
                 }
             }
             .primary()
-            .tooltip(Loc.mainMenu)
+            .tooltip("Main Menu")
             .aboutDialog(
                 visible: $about,
                 app: "Quizzy",
-                developer: "david-swift",
-                version: "dev",
+                developer: "mohfy",
+                version: "0.9.0",
                 icon: .custom(name: "com.mohfy.quizzy"),
-                website: .init(string: "https://git.aparoksha.dev/aparoksha/adwaita-template")!,
-                issues: .init(string: "https://git.aparoksha.dev/aparoksha/adwaita-template/issues")!
+                website: .init(string: "https://github.com/mohfy/quizzy")!,
+                issues: .init(string: "https://github.com/mohfy/quizzy/issues")!
             )
         }
     }

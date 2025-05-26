@@ -1,5 +1,5 @@
 {
-  "originHash" : "6cbe0409be39553536c3eabcb9b9cf52b6f0d2b773b6dec539e1d3980f9dfb99",
+  "originHash" : "bc535fdbd3747208b89920c34ba5897e4ba85c73c1be9ea94f6ed1fcac4828b6",
   "pins" : [
     {
       "identity" : "adwaita-swift",
@@ -29,15 +29,6 @@
       }
     },
     {
-      "identity" : "localized",
-      "kind" : "remoteSourceControl",
-      "location" : "https://git.aparoksha.dev/aparoksha/localized",
-      "state" : {
-        "branch" : "main",
-        "revision" : "29d4c3fe923ef095a0be2b95cf9b31171edf918b"
-      }
-    },
-    {
       "identity" : "meta",
       "kind" : "remoteSourceControl",
       "location" : "https://git.aparoksha.dev/aparoksha/meta",
@@ -62,15 +53,6 @@
       "state" : {
         "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
         "version" : "0.15.3"
-      }
-    },
-    {
-      "identity" : "yams",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jpsim/Yams",
-      "state" : {
-        "revision" : "3d6871d5b4a5cd519adf233fbb576e0a2af71c17",
-        "version" : "5.4.0"
       }
     }
   ],
