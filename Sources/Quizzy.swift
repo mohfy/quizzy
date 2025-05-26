@@ -40,7 +40,7 @@ struct NavigationViewDemo: View {
         .pill()
         .frame(maxWidth: 100)
         .padding()
-        .fileImporter(open: fileDialog, extensions: ["json"]) {
+        .fileImporter(open: fileDialog, extensions: ["quizzy"]) {
           url = $0
         } onClose: {
 

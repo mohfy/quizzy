@@ -4,7 +4,7 @@ Type=Application
 
 Name=Quizzy
 Comment=Answer questions on various topics to test your knowledge!
-Categories=Learn;
+Categories=Education;
 
 Icon=com.mohfy.quizzy
 Exec=Quizzy
