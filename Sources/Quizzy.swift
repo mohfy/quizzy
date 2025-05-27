@@ -69,6 +69,12 @@ struct QuestionItem: Identifiable {
   let question: content
 }
 
+struct QuizOption: Identifiable {
+  let id: Int
+  let label: String
+  let text: String
+}
+
 struct QuizView: View {
   let url: URL?
   @Binding var stack: NavigationStack<Int>
@@ -78,6 +84,14 @@ struct QuizView: View {
   @State private var currentQuestionIndex: Int = 0
   static var score: Int = 0
   static var totalQuestions: Int = 0
+
+  private func optionButton(questionId: Int, option: QuizOption) -> AnyView {
+    Button("\(option.label). \(option.text)") {
+      selectedAnswers[questionId] = option.id
+    }
+    .suggested(selectedAnswers[questionId] == option.id)
+    .padding()
+  }
 
   var view: Body {
     if let quiz = quiz {
@@ -91,59 +105,18 @@ struct QuizView: View {
           Box(spacing: 0) {
             VStack(spacing: 8) {
               Text("Question \(item.id + 1) of \(questions.count)")
-              Text(item.question.question)
+              Text(item.question.question).title4()
                 .padding()
 
-              if selectedAnswers[item.id] == 1 {
-                Button("A. \(item.question.option1)") {
-                  selectedAnswers[item.id] = 1
-                }
-                .suggested()
-                .padding()
-              } else {
-                Button("A. \(item.question.option1)") {
-                  selectedAnswers[item.id] = 1
-                }
-                .padding()
-              }
+              let options = [
+                QuizOption(id: 1, label: "A", text: item.question.option1),
+                QuizOption(id: 2, label: "B", text: item.question.option2),
+                QuizOption(id: 3, label: "C", text: item.question.option3),
+                QuizOption(id: 4, label: "D", text: item.question.option4)
+              ]
 
-              if selectedAnswers[item.id] == 2 {
-                Button("B. \(item.question.option2)") {
-                  selectedAnswers[item.id] = 2
-                }
-                .suggested()
-                .padding()
-              } else {
-                Button("B. \(item.question.option2)") {
-                  selectedAnswers[item.id] = 2
-                }
-                .padding()
-              }
-
-              if selectedAnswers[item.id] == 3 {
-                Button("C. \(item.question.option3)") {
-                  selectedAnswers[item.id] = 3
-                }
-                .suggested()
-                .padding()
-              } else {
-                Button("C. \(item.question.option3)") {
-                  selectedAnswers[item.id] = 3
-                }
-                .padding()
-              }
-
-              if selectedAnswers[item.id] == 4 {
-                Button("D. \(item.question.option4)") {
-                  selectedAnswers[item.id] = 4
-                }
-                .suggested()
-                .padding()
-              } else {
-                Button("D. \(item.question.option4)") {
-                  selectedAnswers[item.id] = 4
-                }
-                .padding()
+              ForEach(options) { option in
+                optionButton(questionId: item.id, option: option)
               }
 
               HStack(spacing: 10) {
