@@ -8,7 +8,7 @@ struct Quizzy: App {
 
   var scene: Scene {
     Window(id: "main") { window in
-      NavigationViewDemo(app: app)
+      ContentView(app: app)
         .topToolbar {
           ToolbarView(app: app, window: window)
         }
@@ -17,7 +17,7 @@ struct Quizzy: App {
   }
 }
 
-struct NavigationViewDemo: View {
+struct ContentView: View {
   @State private var fileDialog = Signal()
   @State private var url: URL?
   @State private var stack = NavigationStack<Int>()
@@ -30,23 +30,23 @@ struct NavigationViewDemo: View {
         QuizView(url: url, stack: $stack)
       }
     } initialView: {
-      VStack(spacing: 10) {
-        Text("quiz file?")
-        Button("Upload") {
-          fileDialog.signal()
-          stack.push(1)
-        }
-        .suggested()
-        .pill()
-        .frame(maxWidth: 100)
-        .padding()
-        .fileImporter(open: fileDialog, extensions: ["quizzy"]) {
-          url = $0
-        } onClose: {
+      StatusPage(
+        "Quizzy", icon: .custom(name: "com.mohfy.quizzy"), description: "learn through quiz-ing!",
+        content: {
+          Button("Import quiz") {
+            fileDialog.signal()
+            stack.push(1)
+          }.suggested()
+            .pill()
+            .frame(maxWidth: 100)
+            .padding()
+            .fileImporter(open: fileDialog, extensions: ["quizzy"]) {
+              url = $0
+            } onClose: {
+            }
+        })
 
-        }
-      }
-    }
+    }.animateTransitions()
   }
 }
 
@@ -74,7 +74,7 @@ struct QuizView: View {
   @Binding var stack: NavigationStack<Int>
   @State private var quiz: Quiz?
   @State private var errorMessage: String?
-  @State private var selectedAnswers: [Int: Int] = [:] // [questionId: selectedOption]
+  @State private var selectedAnswers: [Int: Int] = [:]  // [questionId: selectedOption]
   @State private var currentQuestionIndex: Int = 0
   static var score: Int = 0
   static var totalQuestions: Int = 0
@@ -153,8 +153,8 @@ struct QuizView: View {
                   }
                   .padding()
                 } else {
-                  Button(icon: .default(icon: .goPrevious)) { }
-                  .padding()
+                  Button(icon: .default(icon: .goPrevious)) {}
+                    .padding()
                 }
 
                 Box(spacing: 0)
@@ -268,4 +268,3 @@ struct ResultView: View {
     .padding()
   }
 }
-
