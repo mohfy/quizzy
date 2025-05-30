@@ -129,7 +129,7 @@ struct QuizView: View {
                 QuizOption(id: 4, label: "D", text: item.question.option4)
               ]
 
-              ListBox(options) { option in
+              ListBox(options, selection: .none) { option in
                 optionRow(questionId: item.id, option: option)
               }
               .boxedList()
