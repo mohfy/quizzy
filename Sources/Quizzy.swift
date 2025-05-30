@@ -85,12 +85,26 @@ struct QuizView: View {
   static var score: Int = 0
   static var totalQuestions: Int = 0
 
-  private func optionButton(questionId: Int, option: QuizOption) -> AnyView {
-    Button("\(option.label). \(option.text)") {
-      selectedAnswers[questionId] = option.id
-    }
-    .suggested(selectedAnswers[questionId] == option.id)
-    .padding()
+  private func optionRow(questionId: Int, option: QuizOption) -> AnyView {
+    let isSelected = Binding(
+      get: { selectedAnswers[questionId] == option.id },
+      set: { newValue in 
+        if newValue {
+          // Deselect all other options first
+          for opt in 1...4 {
+            if opt != option.id {
+              selectedAnswers[questionId] = nil
+            }
+          }
+          // Then select this one
+          selectedAnswers[questionId] = option.id
+        }
+      }
+    )
+    
+    return CheckButton()
+      .label("\(option.label). \(option.text)")
+      .active(isSelected)
   }
 
   var view: Body {
@@ -115,9 +129,10 @@ struct QuizView: View {
                 QuizOption(id: 4, label: "D", text: item.question.option4)
               ]
 
-              ForEach(options) { option in
-                optionButton(questionId: item.id, option: option)
+              ListBox(options) { option in
+                optionRow(questionId: item.id, option: option)
               }
+              .boxedList()
 
               HStack(spacing: 10) {
                 if currentQuestionIndex > 0 {
